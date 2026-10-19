@@ -1,0 +1,518 @@
+/* ==========================================================================
+   CrackEx Network - Official Visual Identity System
+   Colors:
+   - Obsidian black: #080609 (Primary background)
+   - Deep plum: #241025 (Panels, borders, layered surfaces)
+   - Vibrant hot pink: #FF168F (Primary accent & interactive elements)
+   - Bright logo pink: #F43EAA (Gradients & glowing highlights)
+   - Brilliant golden yellow: #FFE82E (Headings, icons, CTA accents)
+   - Rich golden orange: #FF9F0A (Gradient shadows & depth)
+   - Warm white: #FFF9E8 (Readable text)
+   ========================================================================== */
+
+:root {
+  /* Exact CrackEx Color Direction */
+  --obsidian-black: #080609;
+  --deep-plum: #241025;
+  --plum-surface: #170b18;
+  --plum-card: #1d0e1e;
+  --plum-elevated: #2b132c;
+  --plum-border: #3b173e;
+  --plum-border-bright: #5a1f60;
+  
+  --vibrant-hot-pink: #FF168F;
+  --bright-logo-pink: #F43EAA;
+  --pink-glow: rgba(255, 22, 143, 0.45);
+  --pink-subtle: rgba(255, 22, 143, 0.12);
+
+  --brilliant-gold: #FFE82E;
+  --rich-orange: #FF9F0A;
+  --gold-glow: rgba(255, 232, 46, 0.45);
+  --gold-subtle: rgba(255, 232, 46, 0.12);
+
+  --warm-white: #FFF9E8;
+  --muted-text: #bda8c0;
+  --dim-text: #867089;
+
+  /* Gradients */
+  --grad-gold: linear-gradient(135deg, #FFE82E 0%, #FF9F0A 100%);
+  --grad-pink: linear-gradient(135deg, #FF168F 0%, #F43EAA 100%);
+  --grad-gold-pink: linear-gradient(135deg, #FFE82E 0%, #FF168F 100%);
+  --grad-plum-vertical: linear-gradient(180deg, #241025 0%, #110612 100%);
+  --grad-card-surface: linear-gradient(180deg, #241025 0%, #150916 100%);
+  --grad-hero-aura: radial-gradient(circle at 50% 50%, rgba(255, 22, 143, 0.28) 0%, rgba(255, 232, 46, 0.15) 35%, transparent 70%);
+
+  /* Dimensional Shadows & Bevels (mimicking CrackEx logo 3D isometric bevel) */
+  --shadow-block-pink: 0 4px 0 #a30758, 0 12px 25px rgba(255, 22, 143, 0.35);
+  --shadow-block-gold: 0 4px 0 #b36e00, 0 12px 25px rgba(255, 232, 46, 0.35);
+  --shadow-block-plum: 0 4px 0 #120613, 0 12px 28px rgba(8, 6, 9, 0.9);
+  --shadow-plum-panel: 0 16px 40px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 232, 46, 0.15);
+}
+
+/* Base resets & typography */
+html {
+  scroll-behavior: smooth;
+  background-color: var(--obsidian-black);
+  color: var(--warm-white);
+}
+
+body {
+  background-color: var(--obsidian-black);
+  color: var(--warm-white);
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  overflow-x: hidden;
+  selection-background-color: var(--vibrant-hot-pink);
+  selection-color: #000000;
+}
+
+::selection {
+  background: var(--vibrant-hot-pink);
+  color: #080609;
+}
+
+/* Minecraft Block & Geometric Patterns */
+.bg-minecraft-grid {
+  background-image: 
+    linear-gradient(to right, rgba(36, 16, 37, 0.4) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(36, 16, 37, 0.4) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+.bg-dot-pattern {
+  background-image: radial-gradient(rgba(255, 22, 143, 0.18) 1.5px, transparent 1.5px);
+  background-size: 24px 24px;
+}
+
+/* Atmospheric Hero Lighting */
+.hero-glow-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  max-width: 900px;
+  height: 600px;
+  background: var(--grad-hero-aura);
+  filter: blur(60px);
+  pointer-events: none;
+  z-index: 1;
+  animation: heroPulse 6s ease-in-out infinite alternate;
+}
+
+@keyframes heroPulse {
+  0% {
+    transform: translate(-50%, -50%) scale(0.92);
+    opacity: 0.75;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1.08);
+    opacity: 1;
+  }
+}
+
+/* Logo Hero Float & Sparkles */
+.hero-logo-wrapper {
+  position: relative;
+  z-index: 10;
+  display: inline-block;
+}
+
+.hero-logo-img {
+  width: 100%;
+  max-width: 360px;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+  filter: drop-shadow(0 15px 35px rgba(255, 22, 143, 0.35)) drop-shadow(0 25px 50px rgba(0, 0, 0, 0.9));
+  animation: logoFloat 5s ease-in-out infinite;
+  user-select: none;
+}
+
+@keyframes logoFloat {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(0.5deg);
+  }
+}
+
+/* Golden Sparkles in Hero (matches logo stars) */
+.sparkle-star {
+  position: absolute;
+  color: var(--brilliant-gold);
+  pointer-events: none;
+  animation: sparkleTwinkle 3s ease-in-out infinite alternate;
+  font-size: 20px;
+  line-height: 1;
+  text-shadow: 0 0 10px var(--brilliant-gold), 0 0 20px var(--rich-orange);
+}
+
+@keyframes sparkleTwinkle {
+  0% {
+    transform: scale(0.7) rotate(0deg);
+    opacity: 0.3;
+  }
+  50% {
+    transform: scale(1.2) rotate(45deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.8) rotate(90deg);
+    opacity: 0.4;
+  }
+}
+
+/* Text Gradients */
+.text-gold-gradient {
+  background: var(--grad-gold);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-pink-gradient {
+  background: var(--grad-pink);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gold-pink-gradient {
+  background: var(--grad-gold-pink);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* CrackEx Dimensional Buttons */
+.btn-hot-pink {
+  background: var(--grad-pink);
+  color: #080609;
+  font-weight: 800;
+  border-radius: 14px;
+  box-shadow: var(--shadow-block-pink);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.btn-hot-pink:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 #a30758, 0 16px 32px rgba(255, 22, 143, 0.5);
+  filter: brightness(1.08);
+}
+
+.btn-hot-pink:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 #a30758, 0 6px 15px rgba(255, 22, 143, 0.3);
+}
+
+.btn-golden {
+  background: var(--grad-gold);
+  color: #080609;
+  font-weight: 800;
+  border-radius: 14px;
+  box-shadow: var(--shadow-block-gold);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.btn-golden:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 #b36e00, 0 16px 32px rgba(255, 232, 46, 0.5);
+  filter: brightness(1.08);
+}
+
+.btn-golden:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 #b36e00, 0 6px 15px rgba(255, 232, 46, 0.3);
+}
+
+.btn-plum-outline {
+  background: var(--deep-plum);
+  border: 1.5px solid var(--plum-border-bright);
+  color: var(--warm-white);
+  font-weight: 700;
+  border-radius: 14px;
+  box-shadow: var(--shadow-block-plum);
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-plum-outline:hover {
+  border-color: var(--vibrant-hot-pink);
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 0 #120613, 0 8px 24px rgba(255, 22, 143, 0.25);
+}
+
+.btn-gold-outline {
+  background: rgba(36, 16, 37, 0.8);
+  border: 1.5px solid var(--brilliant-gold);
+  color: var(--brilliant-gold);
+  font-weight: 700;
+  border-radius: 14px;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-gold-outline:hover {
+  background: var(--brilliant-gold);
+  color: #080609;
+  transform: translateY(-2px);
+  box-shadow: 0 0 20px rgba(255, 232, 46, 0.4);
+}
+
+/* Server IP Box Styling */
+.server-ip-box {
+  background: linear-gradient(180deg, #1f0d20 0%, #100611 100%);
+  border: 2px solid var(--plum-border-bright);
+  border-radius: 20px;
+  box-shadow: var(--shadow-plum-panel), 0 0 20px rgba(255, 22, 143, 0.12);
+  transition: all 0.3s ease;
+}
+
+.server-ip-box:hover {
+  border-color: var(--vibrant-hot-pink);
+  box-shadow: var(--shadow-plum-panel), 0 0 30px rgba(255, 22, 143, 0.25);
+}
+
+/* Deep Plum Panels & Cards */
+.crackex-panel {
+  background: var(--grad-card-surface);
+  border: 1.5px solid var(--deep-plum);
+  border-radius: 20px;
+  box-shadow: var(--shadow-plum-panel);
+  transition: all 0.3s ease;
+}
+
+.crackex-panel:hover {
+  border-color: var(--plum-border-bright);
+}
+
+/* Game Mode Cards */
+.gamemode-card {
+  position: relative;
+  background: linear-gradient(180deg, #241025 0%, #0d040e 100%);
+  border: 1.5px solid var(--plum-border);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+}
+
+.gamemode-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--vibrant-hot-pink);
+  box-shadow: 0 16px 36px -10px rgba(255, 22, 143, 0.35), 0 0 0 1px var(--vibrant-hot-pink);
+}
+
+.gamemode-card .card-top-accent {
+  height: 4px;
+  width: 100%;
+  background: var(--grad-gold-pink);
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
+
+.gamemode-card:hover .card-top-accent {
+  opacity: 1;
+}
+
+/* Blocky Badges */
+.badge-block {
+  font-family: 'Space Grotesk', sans-serif;
+  text-transform: uppercase;
+  font-weight: 800;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  padding: 3px 9px;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.badge-gold {
+  background: rgba(255, 232, 46, 0.12);
+  color: var(--brilliant-gold);
+  border: 1px solid rgba(255, 232, 46, 0.3);
+}
+
+.badge-pink {
+  background: rgba(255, 22, 143, 0.14);
+  color: var(--vibrant-hot-pink);
+  border: 1px solid rgba(255, 22, 143, 0.35);
+}
+
+.badge-plum {
+  background: var(--deep-plum);
+  color: var(--warm-white);
+  border: 1px solid var(--plum-border-bright);
+}
+
+/* Category Filter Pills */
+.cat-pill {
+  transition: all 0.25s ease;
+  background: #140815;
+  color: var(--muted-text);
+  border: 1px solid var(--plum-border);
+}
+
+.cat-pill:hover {
+  border-color: var(--brilliant-gold);
+  color: var(--warm-white);
+}
+
+.cat-pill.active {
+  background: var(--vibrant-hot-pink) !important;
+  color: #080609 !important;
+  font-weight: 800 !important;
+  border-color: var(--vibrant-hot-pink) !important;
+  box-shadow: 0 4px 18px rgba(255, 22, 143, 0.45);
+}
+
+/* Orientation Filters */
+.orient-btn {
+  transition: all 0.2s ease;
+}
+
+.orient-btn.active {
+  background: var(--deep-plum) !important;
+  color: var(--brilliant-gold) !important;
+  border-color: var(--plum-border-bright) !important;
+}
+
+/* Scrollbars */
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-thin::-webkit-scrollbar {
+  height: 6px;
+  width: 6px;
+}
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: #080609;
+}
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: var(--deep-plum);
+  border-radius: 999px;
+  border: 1px solid var(--plum-border);
+}
+.scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  background: var(--vibrant-hot-pink);
+}
+
+/* Toast Notification (Copy IP, Alerts) */
+#toastNotification {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 22px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #241025 0%, #120613 100%);
+  border: 2px solid var(--brilliant-gold);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.9), 0 0 25px rgba(255, 232, 46, 0.35);
+  color: var(--warm-white);
+  font-size: 14px;
+  font-weight: 700;
+  transform: translateY(120px);
+  opacity: 0;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+#toastNotification.show {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Phone Frame Simulator */
+.phone-mode-wrapper {
+  max-width: 420px !important;
+  height: 90vh !important;
+  max-height: 840px !important;
+  border-radius: 40px !important;
+  border: 8px solid var(--deep-plum) !important;
+  box-shadow: 0 0 0 2px var(--plum-border-bright), 0 25px 60px -15px rgba(0, 0, 0, 0.9) !important;
+  position: relative;
+}
+
+.phone-mode-wrapper::before {
+  content: '';
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90px;
+  height: 18px;
+  background: var(--deep-plum);
+  border-radius: 10px;
+  z-index: 25;
+}
+
+/* Theater Mode */
+.theater-mode-wrapper {
+  max-width: 96vw !important;
+  height: 90vh !important;
+  border-radius: 1rem !important;
+}
+
+/* Screen Fit Mode */
+.screenfit-mode-wrapper {
+  max-width: 1100px !important;
+  height: 85vh !important;
+  border-radius: 1.25rem !important;
+}
+
+/* Skeleton Loading Cards */
+.skeleton-card {
+  aspect-ratio: 1 / 1.35;
+  border-radius: 1.25rem;
+  background: linear-gradient(
+    90deg,
+    rgba(36, 16, 37, 0.4) 0%,
+    rgba(59, 23, 62, 0.7) 50%,
+    rgba(36, 16, 37, 0.4) 100%
+  );
+  background-size: 200% 100%;
+  animation: skeletonPulse 1.5s infinite;
+  border: 1px solid var(--plum-border);
+}
+
+@keyframes skeletonPulse {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .hero-logo-img {
+    max-width: 240px;
+  }
+}

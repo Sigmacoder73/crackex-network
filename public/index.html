@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CrackEx Network | Premier Minecraft Esports & Minigames</title>
+  <meta name="description" content="CrackEx Network is the premier competitive Minecraft server. Play Survival, Hardcore Lifesteal, and more coming soon. Join at mc.crackex.xyz!">
+  
+  <!-- Favicon using the official CrackEx Network logo -->
+  <link rel="icon" type="image/png" href="assets/crackex-logo.png">
+  <link rel="apple-touch-icon" href="assets/crackex-logo.png">
+
+  <!-- Google Fonts: Plus Jakarta Sans for clean readable copy & Space Grotesk for block/esports headings -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700;800&family=JetBrains+Mono:wght@600;800&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+            display: ['"Space Grotesk"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            crackex: {
+              black: '#080609',      // Obsidian black (primary background)
+              plum: '#241025',       // Deep plum (panels, borders, dimensional surfaces)
+              plumdark: '#140815',   // Deep plum dark
+              plumborder: '#3b173e', // Deep plum border
+              plumbright: '#5a1f60', // Vibrant plum accent
+              pink: '#FF168F',       // Vibrant hot pink (primary accent & interactive elements)
+              logopink: '#F43EAA',   // Bright logo pink (gradients & glowing highlights)
+              gold: '#FFE82E',       // Brilliant golden yellow (headings, icons, CTA accents)
+              orange: '#FF9F0A',     // Rich golden orange (gradient shadows & depth)
+              white: '#FFF9E8',      // Warm white (readable text)
+              muted: '#bda8c0',      // Muted descriptive text
+              dim: '#826c88',        // Dim borders and hints
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Centralized CrackEx Custom CSS System -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-[#080609] text-[#FFF9E8] min-h-screen flex flex-col font-sans selection:bg-[#FF168F] selection:text-black bg-minecraft-grid">
+
+  <!-- Subtle Atmospheric Background Lighting -->
+  <div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
+    <div class="absolute -top-32 left-1/2 -translate-x-1/2 w-[700px] h-[500px] bg-[#FF168F]/15 rounded-full blur-[140px]"></div>
+    <div class="absolute top-1/3 -right-40 w-96 h-96 bg-[#FFE82E]/10 rounded-full blur-[130px]"></div>
+    <div class="absolute -bottom-40 -left-20 w-96 h-96 bg-[#241025]/80 rounded-full blur-[120px]"></div>
+  </div>
+
+  <!-- Header / Navigation -->
+  <header class="sticky top-0 z-40 backdrop-blur-xl bg-[#080609]/90 border-b border-[#241025] transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
+      
+      <!-- CrackEx Brand Logo -->
+      <a href="#" class="flex items-center gap-3.5 group focus:outline-none focus:ring-2 focus:ring-[#FF168F] rounded-2xl p-1">
+        <div class="relative w-12 h-12 flex items-center justify-center shrink-0">
+          <img 
+            src="assets/crackex-logo.png" 
+            alt="CrackEx Network Logo" 
+            class="w-12 h-12 object-contain group-hover:scale-105 group-hover:drop-shadow-[0_0_12px_rgba(255,22,143,0.5)] transition-all duration-300"
+          >
+        </div>
+        <div class="flex flex-col">
+          <div class="flex items-center gap-2">
+            <span class="text-xl font-extrabold font-display tracking-tight text-white group-hover:text-[#FFE82E] transition-colors">CRACKEX</span>
+            <span class="text-[10px] font-black uppercase tracking-widest px-2 py-0.5 rounded bg-[#FF168F]/15 text-[#FF168F] border border-[#FF168F]/30 font-display">NETWORK</span>
+          </div>
+          <span class="text-[11px] text-[#bda8c0] hidden sm:block font-medium">Minecraft Esports & Minigames</span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <nav class="hidden lg:flex items-center gap-1.5 text-xs font-bold tracking-wide">
+        <a href="#hero" class="px-3 py-2 rounded-xl text-white hover:text-[#FFE82E] hover:bg-[#241025]/50 transition">HOME</a>
+        <a href="#gamemodes" class="px-3 py-2 rounded-xl text-[#FFF9E8]/80 hover:text-[#FFE82E] hover:bg-[#241025]/50 transition">GAME MODES</a>
+        <a href="#howToJoinSection" class="px-3 py-2 rounded-xl text-[#FFF9E8]/80 hover:text-[#FFE82E] hover:bg-[#241025]/50 transition">HOW TO JOIN</a>
+        <a href="https://crackex.xyz/discord" target="_blank" rel="noopener noreferrer" class="px-3 py-2 rounded-xl text-[#FF168F] hover:text-[#FFE82E] hover:bg-[#241025]/50 transition flex items-center gap-1.5">
+          <span>💬</span> DISCORD
+        </a>
+      </nav>
+
+      <!-- Right Navigation Items (IP Pill & Settings) -->
+      <div class="flex items-center gap-2 sm:gap-3">
+        <!-- Quick Copy IP Pill Button -->
+        <button 
+          id="navCopyIpBtn" 
+          title="Click to Copy Server IP" 
+          class="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-[#241025] hover:bg-[#38163a] border border-[#3b173e] hover:border-[#FF168F] text-xs font-mono font-bold text-[#FFF9E8] transition group shadow-sm hover:shadow-[0_0_15px_rgba(255,22,143,0.3)]"
+        >
+          <span class="w-2 h-2 rounded-full bg-[#FFE82E] animate-ping"></span>
+          <span class="text-[#FFE82E] group-hover:text-white transition">mc.crackex.xyz</span>
+          <svg class="w-3.5 h-3.5 text-[#FF168F] group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+        </button>
+
+        <!-- Settings / API Config Button -->
+        <button 
+          id="apiSettingsBtn" 
+          class="p-2 rounded-xl border border-[#3b173e] bg-[#241025]/80 hover:bg-[#241025] hover:border-[#FF168F] text-[#bda8c0] hover:text-[#FFE82E] transition"
+          title="Server IP & Status API Settings"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Container -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 relative z-10 space-y-16">
+
+    <!-- =======================================================================
+         DRAMATIC HERO SECTION
+         Features the uploaded CrackEx Network logo prominently against deep black
+         with subtle pink lighting, golden highlights, and four-point sparkle stars.
+         ======================================================================= -->
+    <section id="hero" class="relative pt-6 pb-12 sm:pt-10 sm:pb-16 text-center flex flex-col items-center">
+      
+      <!-- Hero Logo Container with Atmospheric Lighting -->
+      <div class="hero-logo-wrapper mb-6 relative">
+        <!-- Glowing pink & gold aura behind logo -->
+        <div class="hero-glow-container"></div>
+        
+        <!-- Golden Sparkle Stars matching the logo's four-point stars -->
+        <span class="sparkle-star -top-2 left-4 text-2xl">✦</span>
+        <span class="sparkle-star top-12 -right-4 text-3xl">✦</span>
+        <span class="sparkle-star -bottom-2 -left-6 text-xl">✦</span>
+        <span class="sparkle-star bottom-10 right-2 text-2xl">✦</span>
+        <span class="sparkle-star top-1/2 -left-10 text-sm">✦</span>
+        <span class="sparkle-star top-1/4 -right-10 text-sm">✦</span>
+
+        <!-- The actual uploaded CrackEx Network Logo asset (unmodified proportions) -->
+        <img 
+          src="assets/crackex-logo.png" 
+          alt="CrackEx Network Logo" 
+          class="hero-logo-img mx-auto"
+          width="360"
+          height="360"
+        >
+      </div>
+
+      <!-- Tag / Sub-badge -->
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#241025] border border-[#3b173e] text-xs font-extrabold uppercase tracking-widest text-[#FFE82E] mb-4 shadow-[0_0_20px_rgba(255,232,46,0.15)] font-display">
+        <span class="w-2 h-2 rounded-full bg-[#FF168F] animate-ping"></span>
+        The Premier Minecraft Network
+      </div>
+
+      <!-- Bold Headline -->
+      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black font-display tracking-tight text-[#FFF9E8] max-w-4xl mb-4 leading-tight">
+        WELCOME TO <span class="text-gold-gradient">CRACKEX</span> <span class="text-pink-gradient">NETWORK</span>
+      </h1>
+
+      <!-- Short, Compelling Minecraft Server Tagline -->
+      <p class="text-[#bda8c0] text-base sm:text-lg max-w-2xl mb-8 leading-relaxed font-medium">
+        Experience enhanced community <span class="text-[#FFE82E] font-semibold">Survival</span>, high-stakes <span class="text-[#FF168F] font-semibold">Hardcore Lifesteal</span>, and competitive gameplay built for champions.
+      </p>
+
+      <!-- Large Server IP Panel -->
+      <div class="server-ip-box w-full max-w-xl p-5 sm:p-6 mb-8 text-center relative z-20">
+        <div class="text-xs font-bold uppercase tracking-wider text-[#bda8c0] mb-2 flex items-center justify-center gap-2">
+          <span>SERVER ADDRESS</span>
+          <span class="w-1.5 h-1.5 rounded-full bg-[#FF168F]"></span>
+          <span class="text-[#FFE82E]">JAVA & BEDROCK COMPATIBLE</span>
+        </div>
+
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-4 bg-[#080609]/90 border border-[#3b173e] rounded-2xl p-3 sm:p-4">
+          <div class="text-left">
+            <div class="text-xs text-[#bda8c0]">Server IP:</div>
+            <div id="heroServerIpDisplay" class="text-xl sm:text-2xl font-black font-mono tracking-wider text-[#FFE82E]">
+              mc.crackex.xyz
+            </div>
+            <div class="text-[11px] text-[#826c88] mt-0.5 font-mono">
+              Port: Java 25565 • Bedrock 19132
+            </div>
+          </div>
+
+          <!-- Functional Copy IP Button -->
+          <button 
+            id="heroCopyIpBtn" 
+            class="btn-golden w-full sm:w-auto px-6 py-3.5 text-xs font-extrabold flex items-center justify-center gap-2"
+          >
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+            <span id="heroCopyBtnText">COPY SERVER IP</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Action Buttons: Primary Hot-Pink Join Server & Secondary Gold-Accented Explore Game Modes -->
+      <div class="flex flex-wrap items-center justify-center gap-4">
+        <!-- Primary Hot-Pink Join Server Button -->
+        <button 
+          id="heroJoinServerBtn" 
+          class="btn-hot-pink px-8 py-4 text-sm font-black flex items-center gap-3 tracking-wide"
+        >
+          <span class="text-base">⚔️</span>
+          <span>JOIN SERVER NOW</span>
+        </button>
+
+        <!-- Secondary Gold-Accented Explore Game Modes Button -->
+        <a 
+          href="#gamemodes" 
+          class="btn-gold-outline px-8 py-4 text-sm font-black flex items-center gap-2.5 tracking-wide"
+        >
+          <span>EXPLORE GAME MODES</span>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+        </a>
+      </div>
+
+    </section>
+
+    <!-- =======================================================================
+         MINECRAFT GAME MODES (SURVIVAL, LIFESTEAL, MORE COMING SOON)
+         ======================================================================= -->
+    <section id="gamemodes" class="space-y-6">
+      
+      <!-- Section Header -->
+      <div class="text-center max-w-2xl mx-auto pb-2">
+        <span class="badge-block badge-pink mb-2">CRACKEX REALMS</span>
+        <h2 class="text-3xl sm:text-4xl font-black font-display tracking-tight text-white">
+          FEATURED <span class="text-gold-gradient">GAME MODES</span>
+        </h2>
+        <p class="text-xs sm:text-sm text-[#bda8c0] mt-1">
+          Explore our official gamemodes. Build and trade in peaceful Survival, risk it all in Hardcore Lifesteal, or get ready for what's coming next!
+        </p>
+      </div>
+
+      <!-- 3 Game Mode Cards Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="gameModesGrid">
+        
+        <!-- Mode 1: Survival -->
+        <div class="gamemode-card group">
+          <div class="card-top-accent"></div>
+          <div class="p-6 sm:p-7 flex-1 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <span class="badge-block badge-gold">COMMUNITY</span>
+                <span class="text-xs text-[#bda8c0] font-mono">/server survival</span>
+              </div>
+              <div class="w-14 h-14 rounded-2xl bg-[#241025] border border-[#3b173e] flex items-center justify-center text-3xl mb-4 group-hover:scale-110 transition-transform">
+                🌲
+              </div>
+              <h3 class="text-xl font-bold font-display text-[#FFE82E] group-hover:text-white transition">
+                Survival
+              </h3>
+              <p class="text-xs sm:text-sm text-[#bda8c0] mt-2 leading-relaxed">
+                Enhanced semi-vanilla survival. Build grand bases, claim protected land, trade in a player-driven economy, and explore custom world generation with your friends.
+              </p>
+              
+              <ul class="mt-5 space-y-2 text-xs text-[#FFF9E8]/90">
+                <li class="flex items-center gap-2">
+                  <span class="text-[#FF168F]">✦</span> Land Claiming & Grief Protection
+                </li>
+                <li class="flex items-center gap-2">
+                  <span class="text-[#FF168F]">✦</span> Player Warps & Chest Shops
+                </li>
+                <li class="flex items-center gap-2">
+                  <span class="text-[#FF168F]">✦</span> Custom Enchants & Quality-of-Life
+                </li>
+              </ul>
+            </div>
+
+            <div class="mt-8 pt-4 border-t border-[#241025] flex items-center justify-between">
+              <span class="text-xs text-[#FFE82E] font-bold">Version 1.8 - 1.21.x</span>
+              <button class="mode-details-btn text-xs font-bold text-[#FF168F] hover:text-[#FFE82E] transition flex items-center gap-1" data-mode="survival">
+                <span>Mode Info</span> &rarr;
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mode 2: Lifesteal -->
+        <div class="gamemode-card group">
+          <div class="card-top-accent"></div>
+          <div class="p-6 sm:p-7 flex-1 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <span class="badge-block badge-pink">HARDCORE PVP</span>
+                <span class="text-xs text-[#bda8c0] font-mono">/server lifesteal</span>
+              </div>
+              <div class="w-14 h-14 rounded-2xl bg-[#241025] border border-[#3b173e] flex items-center justify-center text-3xl mb-4 group-hover:scale-110 transition-transform">
+                ❤️‍🔥
+              </div>
+              <h3 class="text-xl font-bold font-display text-[#FFE82E] group-hover:text-white transition">
+                Lifesteal
+              </h3>
+              <p class="text-xs sm:text-sm text-[#bda8c0] mt-2 leading-relaxed">
+                The ultimate high-stakes survival. Slay opponents to steal their hearts. Build concealed bases, craft custom heart beacons, form clan alliances, and dominate the world.
+              </p>
+              
+              <ul class="mt-5 space-y-2 text-xs text-[#FFF9E8]/90">
+                <li class="flex items-center gap-2">
+                  <span class="text-[#FF168F]">✦</span> Eliminate Players to Steal Max Hearts
+                </li>
+                <li class="flex items-center gap-2">
+                  <span class="text-[#FF168F]">✦</span> Non-P2W Balanced Heart Crafting
+                </li>
+                <li class="flex items-center gap-2">
+                  <span class="text-[#FF168F]">✦</span> Clan Wars & Territory Clashes
+                </li>
+              </ul>
+            </div>
+
+            <div class="mt-8 pt-4 border-t border-[#241025] flex items-center justify-between">
+              <span class="text-xs text-[#FFE82E] font-bold">Season 4 Active</span>
+              <button class="mode-details-btn text-xs font-bold text-[#FF168F] hover:text-[#FFE82E] transition flex items-center gap-1" data-mode="lifesteal">
+                <span>Mode Info</span> &rarr;
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mode 3: More Coming Soon -->
+        <div class="gamemode-card group border-dashed border-[#FF168F]/40 hover:border-[#FFE82E]">
+          <div class="card-top-accent"></div>
+          <div class="p-6 sm:p-7 flex-1 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <span class="badge-block badge-plum">IN DEVELOPMENT</span>
+                <span class="text-xs text-[#FFE82E] font-mono font-bold">Stay Tuned</span>
+              </div>
+              <div class="w-14 h-14 rounded-2xl bg-[#241025] border border-[#3b173e] flex items-center justify-center text-3xl mb-4 group-hover:scale-110 transition-transform">
+                🔮
+              </div>
+              <h3 class="text-xl font-bold font-display text-[#FFE82E] group-hover:text-white transition">
+                More Coming Soon
+              </h3>
+              <p class="text-xs sm:text-sm text-[#bda8c0] mt-2 leading-relaxed">
+                Exciting new competitive gamemodes, minigames, and tournament arenas are currently being forged. Join our community Discord to vote on upcoming features!
+              </p>
+              
+              <ul class="mt-5 space-y-2 text-xs text-[#FFF9E8]/90">
+                <li class="flex items-center gap-2">
+                  <span class="text-[#FF168F]">✦</span> Community Voted Game Modes
+                </li>
+                <li class="flex items-center gap-2">
+                  <span class="text-[#FF168F]">✦</span> Weekly Cash Prize Tournaments
+                </li>
+                <li class="flex items-center gap-2">
+                  <span class="text-[#FF168F]">✦</span> Exclusive Beta Playtests
+                </li>
+              </ul>
+            </div>
+
+            <div class="mt-8 pt-4 border-t border-[#241025] flex items-center justify-between">
+              <span class="text-xs text-[#bda8c0]">Suggest in Discord</span>
+              <a href="https://crackex.xyz/discord" target="_blank" rel="noopener noreferrer" class="text-xs font-bold text-[#FF168F] hover:text-[#FFE82E] transition flex items-center gap-1">
+                <span>Vote / Suggest</span> &rarr;
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         HOW TO JOIN CRACKEX NETWORK
+         3-step block tutorial with copy IP action
+         ======================================================================= -->
+    <section id="howToJoinSection" class="crackex-panel p-6 sm:p-10">
+      <div class="max-w-2xl mb-8">
+        <span class="badge-block badge-gold mb-2">QUICK CONNECT GUIDE</span>
+        <h2 class="text-2xl sm:text-3xl font-black font-display text-white">
+          HOW TO JOIN <span class="text-gold-gradient">CRACKEX NETWORK</span>
+        </h2>
+        <p class="text-xs sm:text-sm text-[#bda8c0] mt-1">
+          Jump into the arena in less than 30 seconds. Works on official Java & Bedrock clients!
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Step 1 -->
+        <div class="p-5 rounded-2xl bg-[#080609] border border-[#241025] relative">
+          <span class="text-2xl font-black font-display text-[#FF168F]">01</span>
+          <h4 class="text-sm font-bold text-white mt-2 font-display">Launch Minecraft</h4>
+          <p class="text-xs text-[#bda8c0] mt-1 leading-relaxed">
+            Start Minecraft on any version from <strong class="text-[#FFE82E]">1.8 to 1.21.x</strong> (Java) or the latest Bedrock update.
+          </p>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="p-5 rounded-2xl bg-[#080609] border border-[#241025] relative">
+          <span class="text-2xl font-black font-display text-[#FFE82E]">02</span>
+          <h4 class="text-sm font-bold text-white mt-2 font-display">Open Multiplayer</h4>
+          <p class="text-xs text-[#bda8c0] mt-1 leading-relaxed">
+            Click on <strong>Multiplayer</strong>, then select <strong>Add Server</strong> to save CrackEx in your server list.
+          </p>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="p-5 rounded-2xl bg-[#080609] border border-[#241025] relative">
+          <span class="text-2xl font-black font-display text-[#FF168F]">03</span>
+          <h4 class="text-sm font-bold text-white mt-2 font-display">Enter Server Address</h4>
+          <p class="text-xs text-[#bda8c0] mt-1 leading-relaxed">
+            Paste <code class="text-[#FFE82E] font-mono font-bold">mc.crackex.xyz</code> and hit <strong>Done</strong> & <strong>Join</strong>!
+          </p>
+          <button class="join-step-copy-btn mt-3 w-full py-2 rounded-xl bg-[#241025] hover:bg-[#38163a] border border-[#3b173e] text-xs font-bold text-[#FFE82E] transition flex items-center justify-center gap-1.5">
+            <span>📋</span> Copy IP: mc.crackex.xyz
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         COMMUNITY & DISCORD CALL TO ACTION BANNER (crackex.xyz/discord)
+         ======================================================================= -->
+    <section class="relative rounded-3xl overflow-hidden border-2 border-[#3b173e] bg-gradient-to-r from-[#241025] via-[#150916] to-[#080609] p-8 sm:p-12 shadow-2xl flex flex-col md:flex-row items-center justify-between gap-8">
+      <div class="max-w-xl text-center md:text-left">
+        <span class="badge-block badge-pink mb-3">CRACKEX DISCORD & COMMUNITY</span>
+        <h3 class="text-2xl sm:text-3xl font-black font-display text-white leading-snug">
+          JOIN 200+ WARRIORS IN OUR OFFICIAL COMMUNITY
+        </h3>
+        <p class="text-xs sm:text-sm text-[#bda8c0] mt-2 leading-relaxed">
+          Participate in weekly cash prize tournaments, submit clan scrims, suggest new features, and chat with staff and players.
+        </p>
+      </div>
+
+      <div class="flex flex-col sm:flex-row items-center gap-3 shrink-0">
+        <a 
+          href="https://crackex.xyz/discord" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          class="btn-hot-pink px-6 py-3.5 text-xs font-black flex items-center gap-2"
+        >
+          <span>💬</span>
+          <span>JOIN OUR DISCORD</span>
+        </a>
+        <button 
+          id="bannerCopyIpBtn" 
+          class="btn-golden px-6 py-3.5 text-xs font-black flex items-center gap-2"
+        >
+          <span>⚔️</span>
+          <span>COPY SERVER IP</span>
+        </button>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- =======================================================================
+       SETTINGS & STATUS API CONFIGURATION MODAL
+       ======================================================================= -->
+  <div id="settingsModal" class="fixed inset-0 z-50 hidden bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
+    <div class="w-full max-w-lg crackex-panel p-6 sm:p-8 relative">
+      <!-- Close Settings -->
+      <button id="closeSettingsBtn" class="absolute top-5 right-5 p-2 rounded-xl text-[#bda8c0] hover:text-white hover:bg-[#241025] transition">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+
+      <div class="flex items-center gap-3 mb-5">
+        <div class="w-11 h-11 rounded-2xl bg-[#241025] border border-[#FF168F]/30 flex items-center justify-center text-xl">
+          ⚙️
+        </div>
+        <div>
+          <h3 class="text-lg font-bold font-display text-white">CrackEx Network Settings</h3>
+          <p class="text-xs text-[#bda8c0]">Configure Minecraft server settings</p>
+        </div>
+      </div>
+
+      <!-- Current Status Card -->
+      <div class="p-4 rounded-xl bg-[#080609] border border-[#241025] mb-5 space-y-2 text-xs">
+        <div class="flex items-center justify-between">
+          <span class="text-[#bda8c0]">Server Address:</span>
+          <span id="settingsCurrentAddress" class="font-mono text-white">mc.crackex.xyz</span>
+        </div>
+      </div>
+
+      <!-- Minecraft Status Configuration Form -->
+      <form id="serverConfigForm" class="space-y-4 mb-4">
+        <div>
+          <label for="serverIpInput" class="block text-xs font-bold text-[#FFF9E8] mb-1.5">
+            Minecraft Server Address (Java / Bedrock IP)
+          </label>
+          <input 
+            type="text" 
+            id="serverIpInput" 
+            placeholder="e.g. mc.crackex.xyz"
+            value="mc.crackex.xyz"
+            class="w-full px-4 py-2.5 bg-[#140815] border border-[#3b173e] focus:border-[#FFE82E] rounded-xl text-xs font-mono text-white focus:outline-none"
+          >
+          <p class="text-[11px] text-[#826c88] mt-1">
+            Default: mc.crackex.xyz (Java: 25565 / Bedrock: 19132)
+          </p>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <button 
+            type="submit" 
+            id="saveServerIpBtn" 
+            class="btn-golden flex-1 py-2.5 text-xs font-extrabold"
+          >
+            Save Address
+          </button>
+        </div>
+      </form>
+
+      <!-- Settings Alert -->
+      <div id="settingsAlert" class="hidden mt-4 p-3 rounded-xl text-xs"></div>
+    </div>
+  </div>
+
+  <!-- =======================================================================
+       GAME MODE DETAILS MODAL
+       ======================================================================= -->
+  <div id="modeDetailModal" class="fixed inset-0 z-50 hidden bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
+    <div class="w-full max-w-lg crackex-panel p-6 sm:p-8 relative">
+      <button id="closeModeDetailBtn" class="absolute top-5 right-5 p-2 rounded-xl text-[#bda8c0] hover:text-white hover:bg-[#241025] transition">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+
+      <div class="flex items-center gap-3 mb-4">
+        <div id="modeModalIcon" class="w-12 h-12 rounded-2xl bg-[#241025] border border-[#FFE82E]/30 flex items-center justify-center text-2xl">
+          ⚔️
+        </div>
+        <div>
+          <span id="modeModalBadge" class="badge-block badge-gold mb-1">COMMUNITY</span>
+          <h3 id="modeModalTitle" class="text-xl font-bold font-display text-white">Mode Title</h3>
+        </div>
+      </div>
+
+      <p id="modeModalDesc" class="text-xs text-[#bda8c0] leading-relaxed mb-4">
+        Description of the game mode.
+      </p>
+
+      <div class="p-4 rounded-xl bg-[#080609] border border-[#241025] mb-4 space-y-2">
+        <div class="text-xs font-bold text-[#FFE82E]">Command to Jump in Game:</div>
+        <div class="flex items-center justify-between">
+          <code id="modeModalCommand" class="font-mono text-sm text-white font-bold">/server survival</code>
+          <button id="copyModeCmdBtn" class="px-2.5 py-1 rounded bg-[#241025] hover:bg-[#38163a] text-xs text-[#FF168F] font-bold">
+            Copy
+          </button>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <button id="modalJoinServerBtn" class="btn-hot-pink flex-1 py-3 text-xs font-black">
+          Join CrackEx Network Now
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification (Copy IP & Success) -->
+  <div id="toastNotification">
+    <span class="text-lg">⚔️</span>
+    <span id="toastMessage">mc.crackex.xyz copied to clipboard!</span>
+  </div>
+
+  <!-- =======================================================================
+       FOOTER
+       Black background #080609, muted text, pink links #FF168F, restrained gold detailing #FFE82E
+       ======================================================================= -->
+  <footer class="border-t border-[#241025] bg-[#080609] py-12 relative z-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-6 pb-8 border-b border-[#241025]">
+        <!-- Brand Info -->
+        <div class="flex items-center gap-3">
+          <img src="assets/crackex-logo.png" alt="CrackEx Network" class="w-10 h-10 object-contain">
+          <div>
+            <div class="flex items-center gap-1.5">
+              <span class="font-extrabold text-base font-display text-white">CRACKEX</span>
+              <span class="text-[10px] font-black uppercase tracking-wider px-1.5 py-0.2 bg-[#FF168F]/20 text-[#FF168F] rounded">NETWORK</span>
+            </div>
+            <p class="text-[11px] text-[#bda8c0]">The Next-Generation Minecraft Platform</p>
+          </div>
+        </div>
+
+        <!-- Links -->
+        <div class="flex flex-wrap items-center justify-center gap-6 text-xs font-bold">
+          <a href="#hero" class="text-[#bda8c0] hover:text-[#FFE82E] transition">Home</a>
+          <a href="#gamemodes" class="text-[#bda8c0] hover:text-[#FFE82E] transition">Game Modes</a>
+          <a href="#howToJoinSection" class="text-[#bda8c0] hover:text-[#FFE82E] transition">How to Join</a>
+          <a href="https://crackex.xyz/discord" target="_blank" rel="noopener noreferrer" class="text-[#FF168F] hover:text-[#FFE82E] transition">Discord (crackex.xyz/discord)</a>
+        </div>
+      </div>
+
+      <div class="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] text-[#826c88]">
+        <div>
+          &copy; 2026 CrackEx Network. All rights reserved.
+        </div>
+        <div class="text-center sm:text-right">
+          Not an official Minecraft product. Not approved by or associated with Mojang or Microsoft.
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Application Script -->
+  <script src="app.js"></script>
+</body>
+</html>
